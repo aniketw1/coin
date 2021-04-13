@@ -17,6 +17,12 @@ const BoxContainer = styled.div`
   box-shadow: 0 0 2px rgba(15, 15, 15, 0.28);
   position: relative;
   overflow: hidden;
+  min-height: 100vh;
+  margin: 0 auto;
+  max-width: 31.25em;
+  min-width: 18.75em;
+  padding: 1em;
+  background-color: white;
 `;
 
 const TopContainer = styled.div`
