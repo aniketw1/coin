@@ -6,7 +6,6 @@ export function RegisterForm(props){
     return <BoxContainer>
         <Marginer direction="vertical" margin={1}/>
         <FormContainer>
-            <Input type="text" placeholder="Name"/>
             <Input type="tel" placeholder="Phone Number"/>
             <Input type="number" placeholder="Zipcode"/>
         </FormContainer> 

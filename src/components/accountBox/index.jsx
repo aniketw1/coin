@@ -5,6 +5,7 @@ import { LoginForm } from "./loginForm";
 import { RegisterForm } from "./registerForm";
 import { motion } from "framer-motion";
 import { AccountContext } from "./accountContext";
+import { FullScreen, useFullScreenHandle } from "react-full-screen";
 
 const BoxContainer = styled.div`
   width: 280px;
@@ -123,6 +124,7 @@ const expandingTransition = {
     stiffness: 30,
 }
 
+
 export function AccountBox(props){
     const [isExpanded, setExpanded] = useState(false);
     const [isColorChange, setColorChange] = useState(false);
@@ -156,52 +158,56 @@ export function AccountBox(props){
         }, 400);
     }
 
+    const handle = useFullScreenHandle();
+
     const contextValue = { switchToSignin, switchToSignup };
 
     return(
         <AccountContext.Provider value={contextValue}>
-            <BoxContainer>
-                <TopContainer>
-                    <BackDrop
-                        initial={false}
-                        animate={ isExpanded ? "expanded" : "collapsed" }
-                        variants={backdropVariants}
-                        transition={expandingTransition}
-                    />
-                    <HeaderContainer>
-                        <HeaderTextLogin
+            <FullScreen handle={handle}>
+                <BoxContainer>
+                    <TopContainer>
+                        <BackDrop
                             initial={false}
-                            animate={ isColorChange ? "w" : "g"}
-                            variants={fontExpandChange}
-                            onClick={() => {
-                                if(active === "signup"){
-                                    playExpandingAnimation(); 
-                                    playColorChange();
-                                    switchToSignin();
-                                }
-                            }}>
-                            LOGIN
-                        </HeaderTextLogin>
-                        <HeaderTextRegister 
-                            initial={false}
-                            animate={ isColorChange ? "w" : "g"}
-                            variants={fontExpandChange}
-                            onClick={() => {
-                                if(active === "signin"){
-                                    playExpandingAnimation(); 
-                                    playColorChange();
-                                    switchToSignup();
-                                }
-                            }} >
-                            REGISTER
-                        </HeaderTextRegister>
-                    </HeaderContainer>
-                </TopContainer>
-                <InnerContainer>
-                    { active === "signin" && <LoginForm/> }
-                    { active === "signup" && <RegisterForm/>}  
-                </InnerContainer>
-            </BoxContainer>
+                            animate={ isExpanded ? "expanded" : "collapsed" }
+                            variants={backdropVariants}
+                            transition={expandingTransition}
+                        />
+                        <HeaderContainer>
+                            <HeaderTextLogin
+                                initial={false}
+                                animate={ isColorChange ? "w" : "g"}
+                                variants={fontExpandChange}
+                                onClick={() => {
+                                    if(active === "signup"){
+                                        playExpandingAnimation(); 
+                                        playColorChange();
+                                        switchToSignin();
+                                    }
+                                }}>
+                                LOGIN
+                            </HeaderTextLogin>
+                            <HeaderTextRegister 
+                                initial={false}
+                                animate={ isColorChange ? "w" : "g"}
+                                variants={fontExpandChange}
+                                onClick={() => {
+                                    if(active === "signin"){
+                                        playExpandingAnimation(); 
+                                        playColorChange();
+                                        switchToSignup();
+                                    }
+                                }} >
+                                REGISTER
+                            </HeaderTextRegister>
+                        </HeaderContainer>
+                    </TopContainer>
+                    <InnerContainer>
+                        { active === "signin" && <LoginForm/> }
+                        { active === "signup" && <RegisterForm/>}  
+                    </InnerContainer>
+                </BoxContainer>
+            </FullScreen>
         </AccountContext.Provider>
     )
 }
