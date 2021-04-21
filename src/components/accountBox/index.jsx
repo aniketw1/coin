@@ -5,7 +5,7 @@ import { LoginForm } from "./loginForm";
 import { RegisterForm } from "./registerForm";
 import { motion } from "framer-motion";
 import { AccountContext } from "./accountContext";
-import { FullScreen, useFullScreenHandle } from "react-full-screen";
+
 
 const BoxContainer = styled.div`
   width: 280px;
@@ -17,12 +17,14 @@ const BoxContainer = styled.div`
   box-shadow: 0 0 2px rgba(15, 15, 15, 0.28);
   position: relative;
   overflow: hidden;
-  min-height: 100vh;
-  margin: 0 auto;
-  max-width: 31.25em;
-  min-width: 18.75em;
-  padding: 1em;
-  background-color: white;
+  height: '100vh',
+  min-height : '100vh'
+//   min-height: 100vh;
+//   margin: 0 auto;
+//   max-width: 31.25em;
+//   min-width: 18.75em;
+//   padding: 1em;
+//   background-color: white;
 `;
 
 const TopContainer = styled.div`
@@ -164,13 +166,11 @@ export function AccountBox(props){
         }, 400);
     }
 
-    const handle = useFullScreenHandle();
-
     const contextValue = { switchToSignin, switchToSignup };
 
     return(
         <AccountContext.Provider value={contextValue}>
-            <FullScreen handle={handle}>
+            
                 <BoxContainer>
                     <TopContainer>
                         <BackDrop
@@ -212,8 +212,7 @@ export function AccountBox(props){
                         { active === "signin" && <LoginForm/> }
                         { active === "signup" && <RegisterForm/>}  
                     </InnerContainer>
-                </BoxContainer>
-            </FullScreen>
+                </BoxContainer> 
         </AccountContext.Provider>
     )
 }
