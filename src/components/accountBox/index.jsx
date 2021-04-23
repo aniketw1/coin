@@ -7,6 +7,7 @@ import { motion } from "framer-motion";
 import { AccountContext } from "./accountContext";
 
 
+
 const BoxContainer = styled.div`
   width: 280px;
   min-height: 550px;
@@ -19,12 +20,10 @@ const BoxContainer = styled.div`
   overflow: hidden;
   height: '100vh',
   min-height : '100vh'
-//   min-height: 100vh;
-//   margin: 0 auto;
-//   max-width: 31.25em;
-//   min-width: 18.75em;
-//   padding: 1em;
-//   background-color: white;
+  @media (max-width: 300px) {
+    width: 100%;
+    background-color: red;
+  }
 `;
 
 const TopContainer = styled.div`
@@ -171,7 +170,7 @@ export function AccountBox(props){
     return(
         <AccountContext.Provider value={contextValue}>
             
-                <BoxContainer>
+                <BoxContainer id="bb">
                     <TopContainer>
                         <BackDrop
                             initial={false}
